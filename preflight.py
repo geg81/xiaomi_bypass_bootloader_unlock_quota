@@ -1,4 +1,4 @@
-"""Check one account and calculate a schedule without a submission."""
+"""Run account checks or select the guarded single-request mode."""
 import argparse
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -157,15 +157,37 @@ def main(argv=None):
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--preflight", action="store_true", help="Check the account and clock, then exit.")
     mode.add_argument("--dry-run", action="store_true", help="Also show the schedule. Do not wait or submit.")
+    mode.add_argument("--submit-once", action="store_true", help="Select one request. Live use is disabled pending contract review.")
+    parser.add_argument("--target", help="Optional ISO time with UTC offset, at most 60 seconds ahead.")
     parser.add_argument("--ntp-server", default="time.google.com", help="Use this NTP server for one sample.")
     args = parser.parse_args(argv)
     try:
+        target = None
+        if args.target:
+            if not args.submit_once:
+                raise CheckError("The target option requires single-request mode.")
+            try:
+                target = datetime.fromisoformat(args.target)
+                if target.utcoffset() is None:
+                    raise ValueError()
+            except ValueError:
+                raise CheckError("The target must be an ISO time with a UTC offset.") from None
+        if args.submit_once:
+            import submission
+            if not submission.LIVE_REQUEST_ENABLED:
+                raise CheckError("Live submission is disabled pending request contract review.")
         token = os.environ.get("XIAOMI_SERVICE_TOKEN")
         if token is None:
             with warnings.catch_warnings():
                 warnings.simplefilter("error", getpass.GetPassWarning)
                 token = getpass.getpass("Service token (input hidden): ")
         token = validate_token(token)
+        if args.submit_once:
+            confirmation = input("Type SEND ONE REQUEST to permit one attempt: ")
+            result = submission.single_request(token, confirmation, target, args.ntp_server)
+            print(f"Application result: {result}.")
+            print("The attempt record remains. Check the account manually before any further action.")
+            return 3
         status = check_account(token)
         print(f"Account status: {status}.")
         if status != "eligible":

@@ -2,16 +2,17 @@
 
 ## Open work
 
-- Review or retire the original launch and token helpers in a separate task.
-- Confirm the account response contract before a live account acceptance test.
+- Verify the first-request body and required fields against the current official client or official documentation.
+- Keep live submission disabled until that contract review is complete.
+- Review attempt-state recovery separately before permitting another application.
 
 ## Completion summary
 
-- Replaced NScript.py with an import-safe preflight entry point.
-- Added standalone preflight and dry-run modes with no submission path.
-- Added strict token syntax checks and one fixed-host account status request.
-- Added four-timestamp NTP sampling and a monotonic schedule calculation.
-- Added safe output, offline tests, a code map, and a focused security review.
-- Fork verified: https://github.com/geg81/xiaomi_bypass_bootloader_unlock_quota.
-- All 15 offline tests passed. Live account and NTP checks are not yet verified.
+- Disabled all old application launch and token helper entry points.
+- Added guarded single-request mode, with no automatic retry or redirect.
+- Added a shared process lock and a permanent attempt record before POST.
+- Added fresh eligibility and NTP checks, bounded monotonic waiting, and fixed result labels.
+- All 33 offline tests passed. No live request was sent for this milestone.
+- The user reported a successful first-milestone dry run. Submission remains unverified.
+- Source evidence and remaining contract limits are in doc/request-contract.md.
 

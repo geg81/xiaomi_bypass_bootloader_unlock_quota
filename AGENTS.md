@@ -5,5 +5,6 @@ Read doc/code-map.md before source changes.
 Keep open work and a short result in planning.md.
 Keep detailed evidence in focused documents.
 Never log passwords, tokens, cookies, or raw account responses.
-The first milestone must not submit applications or retry requests.
+Never send live requests during development. Never retry an application.
+Keep live submission disabled until the request contract is verified.
 Run the offline tests after changes to preflight behavior.

@@ -1,4 +1,4 @@
-"""Run the preflight checks. Application submissions are not supported."""
+"""Run preflight checks or the guarded single-request mode."""
 from preflight import main
 
 if __name__ == "__main__":
