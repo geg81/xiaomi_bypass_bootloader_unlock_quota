@@ -1,2 +1,11 @@
-account.txt
-token.txt
+account*.txt
+!account_default.txt
+token*.txt
+cookies*
+*.log
+.env
+.env.*
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
