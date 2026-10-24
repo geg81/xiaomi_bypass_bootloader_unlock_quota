@@ -10,3 +10,4 @@
 | Offline tests | tests/test_preflight.py, tests/test_submission.py | Python unittest discovery |
 | Disabled old entry points | AutoStart.bat, AutoStart.py, AutoJobs.py, Script.py, both GetTokens files | Inert import and exit |
 | Request evidence | doc/request-contract.md | Source review; no live application |
+| Official website evidence | doc/official-client-inspection.md; doc/evidence/website-manifest-2026-10-24.json | tools/check_website_evidence.py checks local hashes and literal matches |

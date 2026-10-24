@@ -2,12 +2,14 @@
 
 ## Open work
 
-- Verify the first-request body and required fields against the current official client or official documentation.
+- Obtain an official Xiaomi Community APK, then inspect the request builder offline. Public website inspection did not resolve the request format.
 - Keep live submission disabled until that contract review is complete.
 - Review attempt-state recovery separately before permitting another application.
 
 ## Completion summary
 
+- Inspected all 168 JavaScript files listed by the official homepage. Found instructions but no application request builder. Saved source hashes and a local evidence check.
+- Checked official APK distribution links. No package was obtained. No browser session, token, or application endpoint was accessed.
 - Disabled all old application launch and token helper entry points.
 - Added guarded single-request mode, with no automatic retry or redirect.
 - Added a shared process lock and a permanent attempt record before POST.

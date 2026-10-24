@@ -2,6 +2,13 @@
 
 ## Result
 
+The official website inspection is complete for the public build linked from
+the homepage. All 168 referenced JavaScript files were checked. The bootloader
+module contains instructions, not the application request builder. No official
+APK file was obtained, so APK inspection remains pending. See the
+[inspection findings](official-client-inspection.md) and
+[file hashes](evidence/website-manifest-2026-10-24.json).
+
 The method, host, path, and inherited body agree across the inspected source
 implementations. This is source-level evidence. It is not an official Xiaomi
 contract and does not prove that the service accepts a first request today.
@@ -39,6 +46,11 @@ endpoint. Agreement between community programs is not independent proof of
 the required fields or their current meaning.
 
 ## Required before live enablement
+
+The public website did not resolve the first-request format. The next input
+is an APK from the official Xiaomi Community installation, with its source
+and version, or an official public APK download link. Supply package files
+only, including splits if present. Do not supply app-data backups or tokens.
 
 Obtain official request documentation or a redacted request specification from
 the current official client. It must show method, host, path, field names,
